@@ -9,7 +9,7 @@ public class HelloWorldController {
 
   @Get(produces = MediaType.TEXT_PLAIN)
   public String helloWorld(){
-    return "hello World!!";
+    return "Hello World!!";
   }
 
 
