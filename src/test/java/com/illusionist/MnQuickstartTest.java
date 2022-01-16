@@ -1,5 +1,6 @@
 package com.illusionist;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.client.annotation.Client;
@@ -40,5 +41,13 @@ class HelloWorldControllerTest {
 
         assertEquals(HttpStatus.OK, response.getStatus());
         assertEquals("Hello from application.yml", response.getBody().get());
+    }
+
+    @Test
+    void helloFromTranslationEndpointReturnsContentFromConfigFile() {
+        var response = client.toBlocking().exchange("/hello/translation", JsonNode.class);
+
+        assertEquals(HttpStatus.OK, response.getStatus());
+        assertEquals("{\"de\":\"Hallo Walt\",\"en\":\"Hello World\"}", response.getBody().get().toString());
     }
 }
